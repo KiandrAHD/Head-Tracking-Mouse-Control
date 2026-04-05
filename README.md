@@ -1,125 +1,165 @@
-# 🧠 Head Tracking Mouse Control
+# AI Head Tracking Mouse with Cursor Overlay
 
-## 🇮🇩 Penjelasan Program
+## 📌 Deskripsi (Indonesia)
 
-Program ini adalah aplikasi berbasis Python yang memungkinkan pengguna untuk mengontrol pergerakan mouse menggunakan gerakan kepala secara real-time melalui webcam.
+Project ini adalah aplikasi Computer Vision yang memungkinkan pengguna mengontrol mouse menggunakan pergerakan kepala secara real-time.
 
-Program memanfaatkan:
+Sistem ini menggunakan MediaPipe Face Mesh untuk mendeteksi wajah dan menghitung arah (yaw & pitch), kemudian mengubahnya menjadi pergerakan kursor mouse.
 
-* **MediaPipe Face Mesh** untuk mendeteksi titik-titik wajah
-* **OpenCV** untuk pengolahan gambar dari kamera
-* Perhitungan vektor untuk menentukan arah kepala (yaw & pitch)
-
-Pergerakan kepala kemudian diterjemahkan menjadi pergerakan kursor pada layar.
-
-### 🎯 Tujuan
-
-* Membuat sistem kontrol alternatif tanpa menggunakan mouse fisik
-* Eksperimen teknologi computer vision dan AI
-* Dasar untuk pengembangan aplikasi seperti:
-
-  * Kontrol game
-  * Aksesibilitas (untuk pengguna dengan keterbatasan fisik)
-  * Human-computer interaction berbasis gesture
+Selain itu, terdapat fitur visual berupa lingkaran overlay pada kursor untuk mempermudah tracking posisi mouse.
 
 ---
 
-## 🇬🇧 Program Description
+## 📌 Description (English)
 
-This program is a Python-based application that allows users to control the mouse cursor using head movements in real-time via a webcam.
+This project is a Computer Vision application that allows users to control the mouse using real-time head movement.
 
-It utilizes:
+It uses MediaPipe Face Mesh to detect facial landmarks and calculate head orientation (yaw & pitch), which is then mapped to cursor movement.
 
-* **MediaPipe Face Mesh** for facial landmark detection
-* **OpenCV** for video processing
-* Vector calculations to estimate head orientation (yaw & pitch)
-
-The head movement is then mapped into cursor movement on the screen.
-
-### 🎯 Purpose
-
-* Create an alternative input system without a physical mouse
-* Explore computer vision and AI concepts
-* Serve as a foundation for applications such as:
-
-  * Game control
-  * Accessibility tools
-  * Gesture-based human-computer interaction
+It also includes a visual cursor overlay for better tracking.
 
 ---
 
-## ⚙️ REQUIREMENTS
+## ⚙️ Features
 
-* Python 3.x
-* OpenCV
-* MediaPipe
-* NumPy
-* PyAutoGUI
-* Keyboard
+* Real-time head tracking
+* Mouse control using face movement
+* Smooth cursor movement (smoothing + acceleration)
+* Calibration system
+* Toggle mouse control (ON/OFF)
+* Cursor overlay visualization (green circle)
+* FPS-independent movement system
+
+---
+
+## 🧠 How It Works
+
+Sistem bekerja dengan cara:
+
+1. Mengambil input dari webcam
+2. Mendeteksi wajah menggunakan MediaPipe Face Mesh 
+3. Menghitung:
+
+   * Posisi wajah (nose center)
+   * Rotasi kepala (yaw & pitch)
+4. Mengubah data tersebut menjadi pergerakan mouse
+5. Menggunakan smoothing dan acceleration agar pergerakan halus
+
+File utama:
+
+* `MonitorTracking.py` → sistem AI head tracking & mouse control 
+* `CursorCircle.py` → overlay lingkaran pada kursor 
+
+---
+
+## 📦 Requirements
+
+Gunakan Python 3.9 – 3.11 (disarankan)
 
 Install dependencies:
 
-```bash
-pip install opencv-python mediapipe numpy pyautogui keyboard
+```bash id="k2a9vx"
+pip install opencv-python mediapipe numpy pyautogui keyboard PyQt5
 ```
 
 ---
 
-## 🚀 Cara Menggunakan (How to Use)
+## 🚀 Installation
 
-### 🇮🇩
+1. Clone repository:
 
-1. Pastikan semua library sudah terinstall
-2. Jalankan program:
+```bash id="r9y2xo"
+git clone https://github.com/username/head-tracking-mouse.git
+```
 
-   ```bash
-   python MonitorTracking.py
-   ```
-3. Pastikan webcam aktif
-4. Hadapkan wajah ke kamera
-5. Gunakan gerakan kepala untuk mengontrol mouse
+2. Masuk ke folder:
 
-### 🎮 Kontrol:
+```bash id="k0jv83"
+cd head-tracking-mouse
+```
 
-* Tekan **F7** → Aktif / Nonaktif kontrol mouse
-* Tekan **C** → Kalibrasi posisi tengah
-* Tekan **Q** → Keluar dari program
+3. Install dependencies:
 
----
-
-### 🇬🇧
-
-1. Make sure all dependencies are installed
-2. Run the program:
-
-   ```bash
-   python MonitorTracking.py
-   ```
-3. Ensure your webcam is active
-4. Face the camera
-5. Move your head to control the cursor
-
-### 🎮 Controls:
-
-* Press **F7** → Toggle mouse control
-* Press **C** → Calibrate center position
-* Press **Q** → Exit the program
+```bash id="f8z0kc"
+pip install -r requirements.txt
+```
 
 ---
 
-## 📌 Notes
+## ▶️ Cara Menjalankan
 
-* Make sure lighting is sufficient for better tracking
-* Keep your face clearly visible to the camera
-* Run as administrator if keyboard input does not work properly
+### 1. Jalankan Head Tracking
+
+```bash id="8k0qv1"
+python MonitorTracking.py
+```
+
+### 2. (Opsional) Jalankan Cursor Overlay
+
+```bash id="6k92mf"
+python CursorCircle.py
+```
 
 ---
 
-## 🔥 Future Improvements
+## 🖥️ Cara Penggunaan
 
-* Eye blink detection for clicking
-* Smoother tracking (Kalman filter)
-* GUI interface
-* Multi-monitor support
+* Hadapkan wajah ke kamera
+* Tekan:
+
+  * `C` → untuk kalibrasi posisi netral
+  * `F7` → untuk ON/OFF kontrol mouse
+  * `Q` → keluar program
+* Gerakkan kepala untuk menggerakkan cursor
 
 ---
+
+## ⚡ Teknologi yang Digunakan
+
+* OpenCV → pengolahan video
+* MediaPipe → face tracking & landmark detection
+* PyAutoGUI → kontrol mouse
+* NumPy → perhitungan numerik
+* PyQt5 → tampilan overlay
+
+---
+
+## 📁 Struktur Project
+
+```
+project/
+│── MonitorTracking.py     # AI head tracking & mouse control
+│── CursorCircle.py        # Cursor overlay (visual)
+│── README.md
+```
+
+---
+
+## 📸 Output
+
+Program akan menampilkan:
+
+* Webcam dengan landmark wajah
+* Status tracking (yaw, pitch, movement)
+* Pergerakan cursor secara real-time
+* Overlay lingkaran pada cursor
+
+---
+
+## ⚠️ Catatan
+
+* Pastikan pencahayaan cukup agar wajah terdeteksi dengan baik
+* Webcam harus aktif dan tidak digunakan aplikasi lain
+* Jika cursor terlalu sensitif, bisa disesuaikan di parameter kode
+
+---
+
+## 👨‍💻 Author
+
+Kiandra
+
+---
+
+## 📄 License
+
+Free to use for learning and development purposes.
